@@ -19,7 +19,7 @@ function FineshScreen({ points, maxPossiblePoints, highscore, dispatch }) {
     emoji = "🥉";
     remark = "Cần luyện tập thêm để trở thành game thủ nhé!";
   }
-  if (percentage >= 20 || percentage === 0) {
+  if (percentage <= 40 || percentage === 0) {
     emoji = "💩";
     remark = "Tuyệt vời bạn không phải là 1 người nghiện game";
   }
