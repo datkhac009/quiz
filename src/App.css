@@ -38,7 +38,6 @@ body {
 }
 .main {
   width: 100%;
-
 }
 .main h3 {
   text-align: center;
@@ -54,7 +53,7 @@ body {
 
 /* Ngược lại (không có .start) → giới hạn */
 .main:not(:has(> .start)) > * {
-  width:  65rem;
+  width: 65rem;
   max-width: 900px;
   margin: 0 auto;
 }
@@ -294,6 +293,7 @@ footer {
 }
 /* CREDIT: https://dev.to/afif/i-made-100-css-loaders-for-your-next-project-4eje */
 .loader {
+    
   width: 50px;
   height: 24px;
   background: radial-gradient(circle closest-side, currentColor 90%, #0000) 0%
@@ -338,14 +338,13 @@ footer {
 }
 
 /* Media Queries for responsiveness */
-@media (max-width: 768px) {
-  .app {
-    padding: 2rem;
+@media (max-width: 1023px) {
+  .main {
+    width: 90%; /* Adjust main width for medium screens to avoid horizontal scroll */
   }
 
-  .main {
-    width: 100%; /* Make main width responsive */
-    padding: 0 1rem; /* Add some padding on smaller screens */
+  .app {
+    padding: 2rem;
   }
 
   .app-header {
@@ -361,7 +360,10 @@ footer {
     max-width: 150px; /* Max size for logo */
     height: auto; /* Keep aspect ratio */
   }
-
+.main:not(:has(> .start)) > * {
+    width: 36rem;
+   
+}
   h1 {
     font-size: 4rem; /* Smaller font size for smaller screens */
   }
@@ -408,22 +410,83 @@ footer {
     font-size: 1.6rem; /* Response sizes for highscore */
   }
 }
+/* Media Queries for responsiveness */
 
-/* For very small screens */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  .main {
+    width: 95%; /* Adjust main width for smaller screens */
+  }
+      .main:has(> .start) > * {
+        width: auto;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+  .app-header {
+    margin-bottom: 1.5rem; /* Reduce bottom margin */
+  }
+
   h1 {
-    font-size: 3.2rem; /* Even smaller h1 */
+    font-size: 2.5rem; /* Adjust h1 size for better display */
   }
 
   h2 {
-    font-size: 2rem; /* Even smaller h2 */
+    font-size: 2rem; /* Adjust h2 size */
+  }
+
+  h3 {
+    font-size: 1.5rem; /* Adjust h3 size */
   }
 
   .btn {
-    padding: 0.8rem 1.6rem; /* Adjust button padding */
+    font-size: 1.8rem; /* Adjust button font size */
+  }
+  .start h2{
+    font-size: 1.5rem;
+  }
+  .description {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  /* Other adjustments based on design needs can be added here */
+}
+/* For very small screens */
+@media (max-width: 480px) {
+  /* Nếu .main chứa .start → full */
+  .main:has(> .start) > * {
+    /* width: 50%; */
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Ngược lại (không có .start) → giới hạn */
+  .main:not(:has(> .start)) > * {
+    width: 25rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2rem; /* Even smaller h1 */
+  }
+
+  h2 {
+    font-size: 1.5rem; /* Even smaller h2 */
+  }
+  h3{
+    font-size: 1rem;
+  }
+  .btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1.2rem; /* Adjust button padding */
   }
 
   .progress {
     font-size: 1.4rem; /* Further adjust progress text size */
+  }
+  .result{
+    padding: 1rem 0;
+  }
+  .result span{
+    font-size: 1.2rem;
   }
 }
