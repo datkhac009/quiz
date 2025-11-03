@@ -25,13 +25,10 @@ html {
 body {
   min-height: 100vh;
   color: var(--color-light);
- background: linear-gradient(160deg, #343a40, #212529);
+  background: linear-gradient(160deg, #343a40, #212529);
 
   padding: 3.2rem;
-
-  
 }
-
 
 .app {
   display: flex;
@@ -45,14 +42,15 @@ body {
 }
 
 .app-header {
-  width: 66rem;
+  width: 80rem;
   margin-bottom: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.app-header>img{
+.app-header > img {
   margin-right: 2rem;
+  border-radius: 99%;
 }
 
 .error {
@@ -65,7 +63,7 @@ body {
 }
 
 img {
- width: 19rem;
+  width: 19rem;
   transition: transform 0.4s ease;
 }
 img:hover {
@@ -76,7 +74,11 @@ li {
 }
 .description {
   font-size: 1.6rem;
-  background: linear-gradient(to right, var(--color-theme), var(--color-accent));
+  background: linear-gradient(
+    to right,
+    var(--color-theme),
+    var(--color-accent)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 500;
@@ -310,4 +312,95 @@ footer {
 .counter * {
   font-size: inherit;
   padding: 0.8rem;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+  .app {
+    padding: 2rem;
+  }
+
+  .main {
+    width: 100%; /* Make main width responsive */
+    padding: 0 1rem; /* Add some padding on smaller screens */
+  }
+
+  .app-header {
+    flex-direction: column; /* Stack logo and title */
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .app-header > img {
+    margin-bottom: 1rem; /* Add margin below the image */
+    width: 50%; /* Responsive image size */
+    max-width: 150px; /* Max size for logo */
+    height: auto; /* Keep aspect ratio */
+  }
+
+  h1 {
+    font-size: 4rem; /* Smaller font size for smaller screens */
+  }
+
+  h2 {
+    font-size: 2.8rem; /* Smaller font size for headings */
+  }
+
+  h3 {
+    font-size: 1.8rem; /* Smaller font size for sub-headings */
+  }
+
+  .btn {
+    font-size: 1.6rem; /* Smaller buttons */
+    padding: 1rem 2rem; /* Adjust padding */
+  }
+
+  .progress {
+    font-size: 1.6rem; /* Adjust progress font size */
+  }
+
+  .loader-container {
+    font-size: 1.2rem; /* Smaller loader text */
+  }
+
+  .timer {
+    font-size: 1.6rem; /* Smaller timer */
+  }
+
+  /* Adjust margins */
+  .counter {
+    margin: 3rem; /* Adjust margin for counter */
+  }
+
+  .options {
+    margin-bottom: 2rem; /* Adjust margin for options */
+  }
+
+  .result {
+    font-size: 1.6rem; /* Make result font smaller */
+  }
+
+  .highscore {
+    font-size: 1.6rem; /* Response sizes for highscore */
+  }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 3.2rem; /* Even smaller h1 */
+  }
+
+  h2 {
+    font-size: 2rem; /* Even smaller h2 */
+  }
+
+  .btn {
+    padding: 0.8rem 1.6rem; /* Adjust button padding */
+  }
+
+  .progress {
+    font-size: 1.4rem; /* Further adjust progress text size */
+  }
 }
