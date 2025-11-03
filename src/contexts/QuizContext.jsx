@@ -8,7 +8,7 @@ const initialState = {
   data: [],
   status: "loading",
   statusFinis: "",
-  index: 0,
+  index: 14,
   answer: null,
   points: 0,
   highscore: 0,

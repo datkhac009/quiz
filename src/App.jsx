@@ -40,6 +40,18 @@ function App() {
                   dispatch={dispatch}
                   answer={state.answer}
                 />
+                <footer>
+                  <Timer
+                    dispatch={dispatch}
+                    secondsRemaining={state.secondsRemaining}
+                  />
+                  <NextButton
+                    index={state.index}
+                    numQuestions={numValue}
+                    dispatch={dispatch}
+                    answer={state.answer}
+                  />
+                </footer>
               </>
             )}
             {/* {console.log("Status", state.status)} */}
@@ -55,22 +67,6 @@ function App() {
             )}
           </MainApp>
         </main>
-        <footer>
-          {state.status === "active" && (
-            <>
-              <Timer
-                dispatch={dispatch}
-                secondsRemaining={state.secondsRemaining}
-              />
-              <NextButton
-                index={state.index}
-                numQuestions={numValue}
-                dispatch={dispatch}
-                answer={state.answer}
-              />
-            </>
-          )}
-        </footer>
       </div>
     </>
   );

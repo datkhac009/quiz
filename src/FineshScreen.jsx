@@ -26,7 +26,6 @@ function FineshScreen({ points, maxPossiblePoints, highscore, dispatch }) {
 
   return (
     <>
-      <h3>{remark}</h3>
       <div className="result">
         <p>
           <span>
@@ -35,7 +34,10 @@ function FineshScreen({ points, maxPossiblePoints, highscore, dispatch }) {
           {maxPossiblePoints} ({Math.ceil(percentage)}%) {emoji}
         </p>
       </div>
-      <p className="highscore">(Highscore: {highscore} points)</p>
+      <p className="highscore">
+      <span>{remark}</span> <br/>
+      (Highscore: {highscore} points)
+      </p>
       <div>
         <button
           className="btn btn-ui"
