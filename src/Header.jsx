@@ -3,7 +3,7 @@ export function Header() {
     <>
       <header className="app-header">
         <img src="public/quiz-avartar.png" alt="React" />
-        <h1>Welcome to my Quiz</h1>
+        <h1>🎮 Welcome to the Ultimate Game Quiz!</h1>
       </header>
     </>
   );

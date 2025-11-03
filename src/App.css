@@ -36,17 +36,36 @@ body {
   align-items: center;
   justify-content: center;
 }
-
 .main {
-  width: 50rem;
+  width: 100%;
+
+}
+.main h3 {
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+/* Nếu .main chứa .start → full */
+.main:has(> .start) > * {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Ngược lại (không có .start) → giới hạn */
+.main:not(:has(> .start)) > * {
+  width:  65rem;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .app-header {
-  width: 80rem;
-  margin-bottom: 4rem;
+  width: 100%;
+  margin-bottom: 2rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  text-align: center;
 }
 .app-header > img {
   margin-right: 2rem;
@@ -137,6 +156,10 @@ h4 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1.5rem;
+}
+.start h2 {
+  font-size: 3rem;
 }
 
 .progress {
