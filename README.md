@@ -1,39 +1,69 @@
-##Quiz App
+# Ultimate Game Quiz
 
-A simple and interactive quiz application built with React.
-Users can answer questions, track their score, and test their knowledge in a timed environment.
+An interactive quiz application built with React and Vite. Players can answer multiple-choice questions, track their score in real time, and compete on a persistent leaderboard.
 
----
+## Live Demo
 
-##Live Demo
+[https://quizss-phi.vercel.app/](https://quizss-phi.vercel.app/)
 
-https://quizzzs.netlify.app/
+## Features
 
----
+- 15 multiple-choice questions about the gaming world
+- Player name input before the game starts
+- Countdown timer per quiz session (2 minutes 30 seconds)
+- Progress bar showing current question and score
+- Leaderboard that persists across page reloads via localStorage
+- Upsert logic — same player name updates the existing score if the new one is higher
+- Quit button to exit the game mid-session
+- Responsive design
 
-##Overview
+## Tech Stack
 
-This project focuses on building an interactive UI with state management, timers, and conditional rendering.
-It demonstrates how to handle user interactions and dynamic data in a clean and responsive way.
+| Technology | Description |
+|------------|-------------|
+| React 18 | UI library |
+| Vite | Build tool and dev server |
+| useReducer | Complex state management |
+| Context API | Global state sharing |
+| localStorage | Client-side data persistence |
+| Vanilla CSS | Styling with glassmorphism and animations |
 
-Features
-Multiple choice questions
-Score tracking
-Timer for each quiz session
-Progress indicator
-Restart quiz functionality
-Responsive design
+## Project Structure
 
----
+```
+src/
+├── contexts/
+│   └── QuizContext.jsx     # Global state and reducer
+├── utils/
+│   ├── localStorage.js     # Questions and leaderboard storage
+│   └── Date.js             # Date formatting utility
+├── App.jsx
+├── Header.jsx
+├── StarSreen.jsx           # Start screen with name input
+├── Questions.jsx
+├── Progress.jsx
+├── Timer.jsx
+├── NextButton.jsx
+├── FineshScreen.jsx        # Results screen
+├── Leaderboard.jsx
+└── App.css
+```
 
-##Scripts
+## Getting Started
 
+```bash
+npm install
 npm run dev
-npm run build
-npm run preview
+```
 
----
+## Scripts
 
-##Author
+```bash
+npm run dev       # Start development server
+npm run build     # Build for production
+npm run preview   # Preview production build
+```
+
+## Author
 
 Dat Nguyen
