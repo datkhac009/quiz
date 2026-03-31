@@ -1,5 +1,3 @@
-// import { useState } from 'react'
-// import { useEffect, useReducer } from "react";
 import "./App.css";
 import { Header } from "./Header";
 import MainApp from "./MainApp";
@@ -10,6 +8,7 @@ import NextButton from "./NextButton";
 import Progress from "./Progress";
 import FineshScreen from "./FineshScreen";
 import Timer from "./Timer";
+import Leaderboard from "./Leaderboard";
 import { useQuiz } from "./contexts/QuizContext";
 
 function App() {
@@ -23,9 +22,11 @@ function App() {
           <MainApp>
             {state.status === "loading" && <Loader />}
             {state.status === "error" && <Error message={state.error} />}
+
             {state.status === "ready" && (
               <StarSreen numQuestions={numValue} dispatch={dispatch} />
             )}
+
             {state.status === "active" && (
               <>
                 <Progress
@@ -51,19 +52,34 @@ function App() {
                     dispatch={dispatch}
                     answer={state.answer}
                   />
+                  <button
+                    className="btn btn-quit"
+                    onClick={() => dispatch({ type: "quit" })}
+                    title="Thoát và quay về màn hình bắt đầu"
+                  >
+                    🚪 Thoát
+                  </button>
                 </footer>
               </>
             )}
-            {/* {console.log("Status", state.status)} */}
+
             {state.status === "finishing" && (
-              <>
-                <FineshScreen
-                  points={state.points}
-                  maxPossiblePoints={maxPossiblePoints}
-                  highscore={state.highscore}
-                  dispatch={dispatch}
-                />
-              </>
+              <FineshScreen
+                points={state.points}
+                maxPossiblePoints={maxPossiblePoints}
+                highscore={state.highscore}
+                dispatch={dispatch}
+                playerName={state.playerName}
+                savedRank={state.savedRank}
+              />
+            )}
+
+            {state.status === "leaderboard" && (
+              <Leaderboard
+                leaderboard={state.leaderboard}
+                dispatch={dispatch}
+                playerName={state.playerName}
+              />
             )}
           </MainApp>
         </main>

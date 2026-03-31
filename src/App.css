@@ -68,7 +68,8 @@ body::before {
   position: relative;
   z-index: 1;
   min-height: 100vh;
-  gap: 2rem;
+  gap: 1rem;
+  padding: 1.5rem 0;
 }
 
 .main {
@@ -104,13 +105,13 @@ body::before {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1.5rem;
-  padding: 2rem 1rem;
+  gap: 0.8rem;
+  padding: 1rem 1rem 0;
 }
 
 .app-header > img {
-  width: 14rem;
-  height: 14rem;
+  width: 9rem;
+  height: 9rem;
   border-radius: 50%;
   box-shadow: 0 0 30px rgba(14, 165, 233, 0.5);
   border: 4px solid rgba(14, 165, 233, 0.3);
@@ -176,7 +177,7 @@ li {
 
 h1 {
   font-family: "Space Grotesk", "Poppins", sans-serif;
-  font-size: 5.6rem;
+  font-size: 4rem;
   font-weight: 800;
   color: var(--color-light);
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -351,6 +352,21 @@ progress {
   border-color: rgba(14, 165, 233, 0.6);
 }
 
+.btn-quit {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(220, 38, 38, 0.2));
+  border: 2px solid rgba(239, 68, 68, 0.5);
+  color: var(--color-light);
+  font-size: 1.6rem;
+  padding: 1.2rem 2.2rem;
+}
+
+.btn-quit:not([disabled]):hover {
+  background: linear-gradient(135deg, var(--color-error), #dc2626);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+  border-color: var(--color-error);
+  transform: translateY(-2px);
+}
+
 .options {
   display: flex;
   flex-direction: column;
@@ -423,32 +439,38 @@ progress {
   color: var(--color-light);
   border-radius: var(--radius-lg);
   text-align: center;
-  padding: 3rem 2rem;
-  font-size: 2.2rem;
+  padding: 1.6rem 2rem;
+  font-size: 2rem;
   font-weight: 600;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.2rem;
   box-shadow: var(--shadow-glow);
   animation: scaleIn 0.5s ease-out;
   border: 2px solid rgba(14, 165, 233, 0.4);
 }
 
 .result span {
-  font-size: 3rem;
+  font-size: 2.4rem;
   margin-right: 8px;
   font-weight: 700;
 }
 
 .highscore {
-  font-size: 2rem;
+  font-size: 1.6rem;
   text-align: center;
-  margin-bottom: 3rem;
-  padding: 1.5rem;
+  margin-bottom: 1.2rem;
+  padding: 1rem 1.5rem;
   background: rgba(249, 115, 22, 0.15);
   backdrop-filter: blur(10px);
   border-radius: var(--radius-md);
   border: 2px solid var(--color-accent);
-  font-weight: 600;
-  animation: pulse 2s ease-in-out infinite;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+.highscore-label {
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 400;
 }
 
 @keyframes pulse {
@@ -832,3 +854,282 @@ footer {
     height: 25px;
   }
 }
+
+/* ─── NAME INPUT ─────────────────────────────────────────────────── */
+
+.name-input-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.name-label {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.3px;
+}
+
+.name-input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: var(--color-light);
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: 1.2rem 1.8rem;
+  outline: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.name-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.name-input:focus {
+  border-color: var(--color-theme);
+  background: rgba(14, 165, 233, 0.08);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+}
+
+.name-counter {
+  align-self: flex-end;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: -0.4rem;
+}
+
+/* ─── START ACTIONS ──────────────────────────────────────────────── */
+
+.start-actions {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn-leaderboard {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.3), rgba(234, 88, 12, 0.2));
+  border: 2px solid rgba(249, 115, 22, 0.5);
+}
+
+.btn-leaderboard:not([disabled]):hover {
+  background: linear-gradient(135deg, var(--color-accent), #ea580c);
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.5);
+  border-color: var(--color-accent);
+}
+
+.finish-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+/* ─── FINISH ACTIONS ─────────────────────────────────────────────── */
+
+.finish-actions {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.player-greeting {
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  animation: fadeInDown 0.5s ease-out;
+}
+
+.rank-badge {
+  display: inline-block;
+  color: var(--color-accent-light);
+  font-weight: 700;
+}
+
+/* ─── BTN DANGER ─────────────────────────────────────────────────── */
+
+.btn-danger {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(220, 38, 38, 0.15));
+  border: 2px solid rgba(239, 68, 68, 0.4);
+}
+
+.btn-danger:not([disabled]):hover {
+  background: linear-gradient(135deg, var(--color-error), #dc2626);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+  border-color: var(--color-error);
+}
+
+/* ─── LEADERBOARD ────────────────────────────────────────────────── */
+
+.leaderboard {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  animation: fadeInUp 0.4s ease-out;
+}
+
+.leaderboard-header {
+  text-align: center;
+}
+
+.leaderboard-subtitle {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.5rem;
+}
+
+.leaderboard-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 4rem 2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-lg);
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  font-size: 1.7rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.leaderboard-empty span {
+  font-size: 4rem;
+}
+
+.leaderboard-table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-md);
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.5rem;
+}
+
+.leaderboard-table thead tr {
+  background: rgba(14, 165, 233, 0.15);
+  border-bottom: 2px solid rgba(14, 165, 233, 0.3);
+}
+
+.leaderboard-table th {
+  padding: 1.4rem 1.6rem;
+  text-align: left;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-theme-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.leaderboard-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background 0.2s ease;
+}
+
+.leaderboard-row:last-child {
+  border-bottom: none;
+}
+
+.leaderboard-row:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.leaderboard-row--top1 {
+  background: rgba(255, 215, 0, 0.08);
+}
+.leaderboard-row--top2 {
+  background: rgba(192, 192, 192, 0.07);
+}
+.leaderboard-row--top3 {
+  background: rgba(205, 127, 50, 0.07);
+}
+
+.leaderboard-row--current {
+  outline: 2px solid rgba(14, 165, 233, 0.5);
+  outline-offset: -2px;
+  background: rgba(14, 165, 233, 0.1) !important;
+}
+
+.leaderboard-table td {
+  padding: 1.2rem 1.6rem;
+  vertical-align: middle;
+}
+
+.leaderboard-rank {
+  font-size: 1.8rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.leaderboard-name {
+  font-weight: 600;
+  color: var(--color-light);
+}
+
+.you-badge {
+  color: var(--color-theme-light);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.leaderboard-points {
+  white-space: nowrap;
+  font-size: 1.6rem;
+}
+
+.max-points {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 1.3rem;
+}
+
+.leaderboard-pct {
+  min-width: 120px;
+}
+
+.pct-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.pct-bar {
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, var(--color-theme), var(--color-theme-light));
+  box-shadow: 0 0 8px rgba(14, 165, 233, 0.4);
+  min-width: 4px;
+  transition: width 0.5s ease;
+  flex-shrink: 0;
+}
+
+.leaderboard-date {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.45);
+  white-space: nowrap;
+}
+
+.leaderboard-actions {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}

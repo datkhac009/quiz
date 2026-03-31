@@ -1,6 +1,10 @@
 import { createContext, useContext, useMemo } from "react";
 import { useEffect, useReducer } from "react";
-import { getQuestionsFromStorage } from "../utils/localStorage";
+import {
+  getQuestionsFromStorage,
+  getLeaderboard,
+  saveScore as saveScoreToStorage,
+} from "../utils/localStorage";
 
 const SECONDS_QUESTIONS = 150;
 
@@ -13,11 +17,20 @@ const initialState = {
   points: 0,
   highscore: 0,
   secondsRemaining: null,
+  playerName: "",
+  leaderboard: [],
+  savedRank: null,
+  prevStatus: "ready",
 };
 function reducer(state, action) {
   switch (action.type) {
     case "data":
-      return { ...state, data: action.payload, status: "ready" };
+      return {
+        ...state,
+        data: action.payload,
+        status: "ready",
+        leaderboard: getLeaderboard(),
+      };
 
     case "dataFailed":
       return { ...state, status: "error", error: action.payload.message };
@@ -57,7 +70,51 @@ function reducer(state, action) {
       };
     }
     case "restart": {
-      return { ...initialState, data: state.data, status: "ready" };
+      return {
+        ...initialState,
+        data: state.data,
+        status: "ready",
+        leaderboard: getLeaderboard(),
+        highscore: state.highscore,
+      };
+    }
+    case "quit": {
+      return {
+        ...initialState,
+        data: state.data,
+        status: "ready",
+        highscore: state.highscore,
+        leaderboard: getLeaderboard(),
+        playerName: "",
+      };
+    }
+    case "setName": {
+      return { ...state, playerName: action.payload };
+    }
+    case "saveScore": {
+      const result = saveScoreToStorage(
+        state.playerName,
+        state.points,
+        action.payload // maxPossiblePoints
+      );
+      return {
+        ...state,
+        leaderboard: getLeaderboard(),
+        savedRank: result.rank,
+        highscore:
+          state.points > state.highscore ? state.points : state.highscore,
+      };
+    }
+    case "showLeaderboard": {
+      return {
+        ...state,
+        leaderboard: getLeaderboard(),
+        prevStatus: state.status,
+        status: "leaderboard",
+      };
+    }
+    case "hideLeaderboard": {
+      return { ...state, status: state.prevStatus ?? "ready" };
     }
     case "tick": {
       const newSeconds = state.secondsRemaining - 1;
@@ -75,10 +132,10 @@ function reducer(state, action) {
 const QuizContext = createContext();
 function QuizProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  
+
   // useMemo cho numValue và maxPossiblePoints để tránh tính toán lại không cần thiết
   const numValue = state.data.length;
-  
+
   const maxPossiblePoints = useMemo(
     () => state.data.reduce((prev, cur) => prev + cur.points, 0),
     [state.data]
@@ -90,9 +147,9 @@ function QuizProvider({ children }) {
       try {
         // Simulate loading delay để hiển thị loader
         await new Promise((resolve) => setTimeout(resolve, 500));
-        
+
         const questions = getQuestionsFromStorage();
-        
+
         if (questions && questions.length > 0) {
           dispatch({ type: "data", payload: questions });
         } else {
@@ -106,7 +163,7 @@ function QuizProvider({ children }) {
     loadQuestions();
   }, []);
 
-  // Tối ưu: state thay đổi mới tạo object mới, dispatch luôn stable
+  // Tối ưu state thay đổi mới tạo object mới, dispatch luôn stable
   const memoValue = useMemo(
     () => ({
       state,

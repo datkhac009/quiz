@@ -1,4 +1,5 @@
 // Utility functions để quản lý localStorage
+import { formatDate } from "./Date.js";
 
 const STORAGE_KEY = "quiz_questions_data";
 const DEFAULT_QUESTIONS = [
@@ -128,5 +129,90 @@ export function getQuestionsFromStorage() {
   } catch (error) {
     console.error("Error getting questions from localStorage:", error);
     return DEFAULT_QUESTIONS;
+  }
+}
+
+// ─── LEADERBOARD FUNCTIONS ───────
+
+const LEADERBOARD_KEY = "quiz_leaderboard";
+const MAX_LEADERBOARD_SIZE = 20;
+
+export function getLeaderboard() {
+  try {
+    const stored = localStorage.getItem(LEADERBOARD_KEY);
+    if (!stored) return [];
+    const parsed = JSON.parse(stored);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+// Nếu tên đã tồn tại → cập nhật điểm cao hơn (upsert)
+// Nếu tên chưa có → thêm entry mới
+export function saveScore(name, points, maxPoints) {
+  try {
+    const leaderboard = getLeaderboard();
+    const percentage = Math.round((points / maxPoints) * 100);
+    const trimmedName = name.trim();
+
+    const existingIndex = leaderboard.findIndex(
+      (e) => e.name.toLowerCase() === trimmedName.toLowerCase()
+    );
+
+    let updated;
+    let isUpdate = false;
+
+    if (existingIndex !== -1) {
+      // Tên đã tồn tại thì chỉ cập nhật nếu điểm mới cao hơn
+      const existing = leaderboard[existingIndex];
+      isUpdate = true;
+      if (points > existing.points) {
+        updated = [...leaderboard];
+        updated[existingIndex] = {
+          ...existing,
+          points,
+          maxPoints,
+          percentage,
+          date: formatDate(),
+        };
+      } else {
+        // Điểm không cao hơn thì sẽ giữ nguyên
+        updated = leaderboard;
+      }
+    } else {
+      // Tên chưa có thì thêm mới
+      const newEntry = {
+        id: Date.now(),
+        name: trimmedName,
+        points,
+        maxPoints,
+        percentage,
+        date: formatDate(),
+      };
+      updated = [...leaderboard, newEntry];
+    }
+
+    updated = updated
+      .sort((a, b) => b.points - a.points || b.percentage - a.percentage)
+      .slice(0, MAX_LEADERBOARD_SIZE);
+
+    localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(updated));
+
+    const rank = updated.findIndex(
+      (e) => e.name.toLowerCase() === trimmedName.toLowerCase()
+    ) + 1;
+
+    return { success: true, rank, isUpdate };
+  } catch {
+    return { success: false, rank: -1, isUpdate: false };
+  }
+}
+
+export function clearLeaderboard() {
+  try {
+    localStorage.removeItem(LEADERBOARD_KEY);
+  } catch (error) {
+    console.error("Error clearing leaderboard:", error);
   }
 }
